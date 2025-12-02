@@ -28,102 +28,109 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.pictureBoxFormula_SIS = new System.Windows.Forms.PictureBox();
-            this.labelVarA_SIS = new System.Windows.Forms.Label();
-            this.textBoxVarA_SIS = new System.Windows.Forms.TextBox();
-            this.labelResult_SIS = new System.Windows.Forms.Label();
-            this.textBoxResult_SIS = new System.Windows.Forms.TextBox();
-            this.buttonDone_SIS = new System.Windows.Forms.Button();
-            this.buttonInfo_SIS = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFormula_SIS)).BeginInit();
-            this.SuspendLayout();
+            pictureBoxFormula_SIS = new PictureBox();
+            labelVarA_SIS = new Label();
+            textBoxVarA_SIS = new TextBox();
+            labelResult_SIS = new Label();
+            textBoxResult_SIS = new TextBox();
+            buttonDone_SIS = new Button();
+            buttonInfo_SIS = new Button();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxFormula_SIS).BeginInit();
+            SuspendLayout();
             // 
             // pictureBoxFormula_SIS
             // 
-            this.pictureBoxFormula_SIS.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxFormula_SIS.Image")));
-            this.pictureBoxFormula_SIS.Location = new System.Drawing.Point(12, 12);
-            this.pictureBoxFormula_SIS.Name = "pictureBoxFormula_SIS";
-            this.pictureBoxFormula_SIS.Size = new System.Drawing.Size(280, 80);
-            this.pictureBoxFormula_SIS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxFormula_SIS.TabIndex = 0;
-            this.pictureBoxFormula_SIS.TabStop = false;
+            pictureBoxFormula_SIS.Location = new Point(16, 18);
+            pictureBoxFormula_SIS.Margin = new Padding(4, 5, 4, 5);
+            pictureBoxFormula_SIS.Name = "pictureBoxFormula_SIS";
+            pictureBoxFormula_SIS.Size = new Size(373, 123);
+            pictureBoxFormula_SIS.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxFormula_SIS.TabIndex = 0;
+            pictureBoxFormula_SIS.TabStop = false;
             // 
             // labelVarA_SIS
             // 
-            this.labelVarA_SIS.AutoSize = true;
-            this.labelVarA_SIS.Location = new System.Drawing.Point(12, 110);
-            this.labelVarA_SIS.Name = "labelVarA_SIS";
-            this.labelVarA_SIS.Size = new System.Drawing.Size(85, 13);
-            this.labelVarA_SIS.TabIndex = 1;
-            this.labelVarA_SIS.Text = "Введите X = 2:";
+            labelVarA_SIS.AutoSize = true;
+            labelVarA_SIS.Location = new Point(16, 169);
+            labelVarA_SIS.Margin = new Padding(4, 0, 4, 0);
+            labelVarA_SIS.Name = "labelVarA_SIS";
+            labelVarA_SIS.Size = new Size(107, 20);
+            labelVarA_SIS.TabIndex = 1;
+            labelVarA_SIS.Text = "Введите X = 2:";
             // 
             // textBoxVarA_SIS
             // 
-            this.textBoxVarA_SIS.Location = new System.Drawing.Point(103, 107);
-            this.textBoxVarA_SIS.Name = "textBoxVarA_SIS";
-            this.textBoxVarA_SIS.Size = new System.Drawing.Size(100, 20);
-            this.textBoxVarA_SIS.TabIndex = 2;
-            this.textBoxVarA_SIS.Text = "2";
+            textBoxVarA_SIS.Location = new Point(137, 165);
+            textBoxVarA_SIS.Margin = new Padding(4, 5, 4, 5);
+            textBoxVarA_SIS.Name = "textBoxVarA_SIS";
+            textBoxVarA_SIS.Size = new Size(132, 27);
+            textBoxVarA_SIS.TabIndex = 2;
+            textBoxVarA_SIS.Text = "2";
             // 
             // labelResult_SIS
             // 
-            this.labelResult_SIS.AutoSize = true;
-            this.labelResult_SIS.Location = new System.Drawing.Point(12, 150);
-            this.labelResult_SIS.Name = "labelResult_SIS";
-            this.labelResult_SIS.Size = new System.Drawing.Size(65, 13);
-            this.labelResult_SIS.TabIndex = 3;
-            this.labelResult_SIS.Text = "Результат:";
+            labelResult_SIS.AutoSize = true;
+            labelResult_SIS.Location = new Point(16, 231);
+            labelResult_SIS.Margin = new Padding(4, 0, 4, 0);
+            labelResult_SIS.Name = "labelResult_SIS";
+            labelResult_SIS.Size = new Size(78, 20);
+            labelResult_SIS.TabIndex = 3;
+            labelResult_SIS.Text = "Результат:";
             // 
             // textBoxResult_SIS
             // 
-            this.textBoxResult_SIS.Location = new System.Drawing.Point(103, 147);
-            this.textBoxResult_SIS.Name = "textBoxResult_SIS";
-            this.textBoxResult_SIS.ReadOnly = true;
-            this.textBoxResult_SIS.Size = new System.Drawing.Size(100, 20);
-            this.textBoxResult_SIS.TabIndex = 4;
+            textBoxResult_SIS.Location = new Point(137, 226);
+            textBoxResult_SIS.Margin = new Padding(4, 5, 4, 5);
+            textBoxResult_SIS.Name = "textBoxResult_SIS";
+            textBoxResult_SIS.ReadOnly = true;
+            textBoxResult_SIS.Size = new Size(132, 27);
+            textBoxResult_SIS.TabIndex = 4;
             // 
             // buttonDone_SIS
             // 
-            this.buttonDone_SIS.Location = new System.Drawing.Point(220, 105);
-            this.buttonDone_SIS.Name = "buttonDone_SIS";
-            this.buttonDone_SIS.Size = new System.Drawing.Size(75, 23);
-            this.buttonDone_SIS.TabIndex = 5;
-            this.buttonDone_SIS.Text = "Выполнить";
-            this.buttonDone_SIS.UseVisualStyleBackColor = true;
-            this.buttonDone_SIS.Click += new System.EventHandler(this.buttonDone_SIS_Click);
+            buttonDone_SIS.Location = new Point(293, 162);
+            buttonDone_SIS.Margin = new Padding(4, 5, 4, 5);
+            buttonDone_SIS.Name = "buttonDone_SIS";
+            buttonDone_SIS.Size = new Size(100, 35);
+            buttonDone_SIS.TabIndex = 5;
+            buttonDone_SIS.Text = "Выполнить";
+            buttonDone_SIS.UseVisualStyleBackColor = true;
+            buttonDone_SIS.Click += buttonDone_SIS_Click;
             // 
             // buttonInfo_SIS
             // 
-            this.buttonInfo_SIS.Location = new System.Drawing.Point(220, 145);
-            this.buttonInfo_SIS.Name = "buttonInfo_SIS";
-            this.buttonInfo_SIS.Size = new System.Drawing.Size(75, 23);
-            this.buttonInfo_SIS.TabIndex = 6;
-            this.buttonInfo_SIS.Text = "Справка";
-            this.buttonInfo_SIS.UseVisualStyleBackColor = true;
-            this.buttonInfo_SIS.Click += new System.EventHandler(this.buttonInfo_SIS_Click);
+            buttonInfo_SIS.Location = new Point(293, 223);
+            buttonInfo_SIS.Margin = new Padding(4, 5, 4, 5);
+            buttonInfo_SIS.Name = "buttonInfo_SIS";
+            buttonInfo_SIS.Size = new Size(100, 35);
+            buttonInfo_SIS.TabIndex = 6;
+            buttonInfo_SIS.Text = "Справка";
+            buttonInfo_SIS.UseVisualStyleBackColor = true;
+            buttonInfo_SIS.Click += buttonInfo_SIS_Click;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(307, 190);
-            this.Controls.Add(this.buttonInfo_SIS);
-            this.Controls.Add(this.buttonDone_SIS);
-            this.Controls.Add(this.textBoxResult_SIS);
-            this.Controls.Add(this.labelResult_SIS);
-            this.Controls.Add(this.textBoxVarA_SIS);
-            this.Controls.Add(this.labelVarA_SIS);
-            this.Controls.Add(this.pictureBoxFormula_SIS);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "FormMain";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Спринт 6. Таск 0. Вариант 22";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFormula_SIS)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(409, 292);
+            Controls.Add(buttonInfo_SIS);
+            Controls.Add(buttonDone_SIS);
+            Controls.Add(textBoxResult_SIS);
+            Controls.Add(labelResult_SIS);
+            Controls.Add(textBoxVarA_SIS);
+            Controls.Add(labelVarA_SIS);
+            Controls.Add(pictureBoxFormula_SIS);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 5, 4, 5);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "FormMain";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Спринт 6. Таск 0. Вариант 22";
+            Load += FormMain_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBoxFormula_SIS).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

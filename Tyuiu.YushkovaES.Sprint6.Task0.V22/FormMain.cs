@@ -36,5 +36,10 @@ namespace Tyuiu.YushkovaES.Sprint6.Task0.V22
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
