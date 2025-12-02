@@ -10,23 +10,32 @@ namespace Tyuiu.YushkovaES.Sprint6.Task3.V1.Lib
             int cols = matrix.GetLength(1);
             int[,] resultMatrix = (int[,])matrix.Clone();
 
-            // Сортировка пузырьком по первому столбцу
+            // Создаем массив для сортировки первого столбца
+            int[] firstColumn = new int[rows];
+            for (int i = 0; i < rows; i++)
+            {
+                firstColumn[i] = resultMatrix[i, 0];
+            }
+
+            // Сортируем первый столбец пузырьком
             for (int i = 0; i < rows - 1; i++)
             {
                 for (int j = 0; j < rows - i - 1; j++)
                 {
-                    // Сравниваем значения первого столбца
-                    if (resultMatrix[j, 0] > resultMatrix[j + 1, 0])
+                    if (firstColumn[j] > firstColumn[j + 1])
                     {
-                        // Меняем местами целые строки
-                        for (int k = 0; k < cols; k++)
-                        {
-                            int temp = resultMatrix[j, k];
-                            resultMatrix[j, k] = resultMatrix[j + 1, k];
-                            resultMatrix[j + 1, k] = temp;
-                        }
+                        // Меняем местами только элементы первого столбца
+                        int temp = firstColumn[j];
+                        firstColumn[j] = firstColumn[j + 1];
+                        firstColumn[j + 1] = temp;
                     }
                 }
+            }
+
+            // Записываем отсортированный первый столбец обратно в матрицу
+            for (int i = 0; i < rows; i++)
+            {
+                resultMatrix[i, 0] = firstColumn[i];
             }
 
             return resultMatrix;
