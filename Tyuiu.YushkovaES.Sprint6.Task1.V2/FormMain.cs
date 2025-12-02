@@ -46,5 +46,10 @@ namespace Tyuiu.YushkovaES.Sprint6.Task0.V2
             MessageBox.Show("Таск 1 выполнил студент группы ??? Спирин И.С.",
                 "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
