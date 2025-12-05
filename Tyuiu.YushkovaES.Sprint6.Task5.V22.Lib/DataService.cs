@@ -1,4 +1,6 @@
-﻿using tyuiu.cources.programming.interfaces.Sprint6;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
+using tyuiu.cources.programming.interfaces.Sprint6;
 
 namespace Tyuiu.YushkovaES.Sprint6.Task5.V22.Lib
 {
@@ -6,74 +8,84 @@ namespace Tyuiu.YushkovaES.Sprint6.Task5.V22.Lib
     {
         public double[] LoadFromDataFile(string path)
         {
-            string fileData = File.ReadAllText(path);
-
-            // Разделяем по пробелам и преобразуем в числа
-            List<double> numbers = new List<double>();
-            string[] strNumbers = fileData.Split(new[] { ' ', '\t', '\n', '\r' },
-                StringSplitOptions.RemoveEmptyEntries);
-
-            // Берем максимум 20 чисел
-            int count = Math.Min(strNumbers.Length, 20);
-
-            for (int i = 0; i < count; i++)
+            if (!File.Exists(path))
             {
-                if (double.TryParse(strNumbers[i], out double number))
-                {
-                    numbers.Add(number);
-                }
+                throw new FileNotFoundException($"Файл '{path}' не найден");
             }
 
-            return numbers.ToArray();
-        }
-
-        public double[] GetNumbersGreaterThanFive(double[] numbers)
-        {
-            if (numbers == null)
-            {
-                return new double[0];
-            }
+            // Читаем все строки из файла
+            string[] lines = File.ReadAllLines(path);
 
             List<double> result = new List<double>();
-            foreach (double num in numbers)
+
+            Console.WriteLine("=== ДЕБАГ ИНФОРМАЦИЯ ===");
+            Console.WriteLine($"Прочитано строк: {lines.Length}");
+
+            for (int i = 0; i < lines.Length; i++)
             {
-                if (num > 5)
+                string line = lines[i];
+
+                // Пропускаем пустые строки
+                if (string.IsNullOrWhiteSpace(line))
                 {
-                    result.Add(num);
+                    Console.WriteLine($"Строка {i + 1}: ПУСТАЯ - пропускаем");
+                    continue;
+                }
+
+                string cleanedLine = line.Trim();
+                Console.Write($"Строка {i + 1}: '{line}' -> '{cleanedLine}' -> ");
+
+                // Заменяем запятую на точку для корректного парсинга
+                cleanedLine = cleanedLine.Replace(',', '.');
+
+                // Пробуем парсить с разными культурами
+                bool parseSuccess = false;
+                double number = 0;
+
+                // Попробуем с InvariantCulture
+                parseSuccess = double.TryParse(cleanedLine,
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out number);
+
+                if (!parseSuccess)
+                {
+                    // Попробуем с текущей культурой
+                    parseSuccess = double.TryParse(cleanedLine, out number);
+                }
+
+                if (parseSuccess)
+                {
+                    // Округляем до трех знаков после запятой
+                    number = Math.Round(number, 3);
+
+                    Console.WriteLine($"число: {number}");
+
+                    // Отбираем только числа БОЛЬШЕ 5
+                    if (number > 5)
+                    {
+                        result.Add(number);
+                        Console.WriteLine($"  -> ДОБАВЛЕНО (>{5})");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"  -> НЕ добавлено (≤{5})");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"ОШИБКА ПАРСИНГА");
                 }
             }
+
+            Console.WriteLine($"=== ВСЕГО НАЙДЕНО ЧИСЕЛ > 5: {result.Count} ===");
+            Console.WriteLine($"Результат: [{string.Join(", ", result)}]");
+
             return result.ToArray();
         }
 
-        public double[] RoundNumbers(double[] numbers, int decimals = 3)
-        {
-            if (numbers == null || numbers.Length == 0)
-            {
-                return new double[0];
-            }
 
-            double[] result = new double[numbers.Length];
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                result[i] = Math.Round(numbers[i], decimals, MidpointRounding.AwayFromZero);
-            }
-            return result;
-        }
 
-        // Метод для получения целых чисел (если нужно)
-        public int[] ConvertToIntArray(double[] numbers)
-        {
-            if (numbers == null)
-            {
-                return new int[0];
-            }
-
-            int[] result = new int[numbers.Length];
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                result[i] = (int)numbers[i];
-            }
-            return result;
-        }
     }
 }
+

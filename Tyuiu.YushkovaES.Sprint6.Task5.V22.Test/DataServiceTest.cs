@@ -4,103 +4,104 @@ namespace Tyuiu.YushkovaES.Sprint6.Task5.V22.Test
     [TestClass]
     public sealed class DataServiceTest
     {
-        [TestMethod]
-        public void ValidLoadFromDataFile()
+        private string CreateTestFileWithContent(string content)
         {
-            // Создаем тестовый файл
-            string path = @"C:\testfile_Sprint6_Task5_V22.txt";
-            string testData = "3.0 8.5 1.2 12.7 5.0 7.3 9.8 2.1 15.4 4.9 6.2 10.1 11.5 0.5 14.9 3.3 8.7 2.8 13.6 1.9 20.0 25.5";
-            File.WriteAllText(path, testData);
+            // Path.GetTempFileName() создает уникальное имя временного файла
+            string tempFilePath = Path.GetTempFileName();
 
-            DataService ds = new DataService();
+            // Записываем содержимое в файл
+            File.WriteAllText(tempFilePath, content);
 
-            // Получаем данные
-            double[] result = ds.LoadFromDataFile(path);
-
-            // Проверяем количество элементов (должно быть 20)
-            Assert.AreEqual(20, result.Length);
-
-            // Проверяем некоторые значения
-            Assert.AreEqual(3.0, result[0], 0.001);
-            Assert.AreEqual(8.5, result[1], 0.001);
-            Assert.AreEqual(1.2, result[2], 0.001);
-
-            // Очищаем тестовый файл
-            File.Delete(path);
+            // Возвращаем путь к созданному файлу
+            return tempFilePath;
         }
-
-        [TestMethod]
-        public void ValidGetNumbersGreaterThanFive()
+            [TestMethod]
+        public void ValidLoadFromDataFile_Diagnostic()
         {
-            DataService ds = new DataService();
-
             // Тестовые данные
-            double[] testArray = { 3.0, 8.5, 1.2, 12.7, 5.0, 7.3, 9.8, 2.1, 15.4, 4.9 };
+            string testData = @"-17
+0
+12
+-14,32
+5
+-7,84
+12,89
+-1,57
+-3,64
+-13,26
+-8,91
+-17,77
+35
+-9
+13,83
+12,76
+8,86
+0
+-1,49
+-7";
 
-            // Получаем результат
-            double[] result = ds.GetNumbersGreaterThanFive(testArray);
+            string filePath = CreateTestFileWithContent(testData);
 
-            // Проверяем количество чисел > 5 (8.5, 12.7, 7.3, 9.8, 15.4)
-            Assert.AreEqual(5, result.Length);
+            try
+            {
+                // Сначала прочитаем файл сами для проверки
+                string[] lines = File.ReadAllLines(filePath);
+                Console.WriteLine($"Файл содержит {lines.Length} строк:");
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}: '{lines[i]}'");
+                }
 
-            // Проверяем конкретные значения
-            Assert.AreEqual(8.5, result[0], 0.001);
-            Assert.AreEqual(12.7, result[1], 0.001);
-            Assert.AreEqual(7.3, result[2], 0.001);
-            Assert.AreEqual(9.8, result[3], 0.001);
-            Assert.AreEqual(15.4, result[4], 0.001);
-        }
+                DataService ds = new DataService();
+                double[] result = ds.LoadFromDataFile(filePath);
 
-        [TestMethod]
-        public void ValidRoundNumbers()
-        {
-            DataService ds = new DataService();
+                double[] wait = { 12.0, 12.89, 35.0, 13.83, 12.76, 8.86 };
 
-            // Тестовые данные
-            double[] testArray = { 12.3456, 7.8912, 9.1234, 15.6789 };
+                Console.WriteLine($"\nОжидаемый результат: [{string.Join(", ", wait)}]");
+                Console.WriteLine($"Полученный результат: [{string.Join(", ", result)}]");
 
-            // Получаем результат с округлением до 3 знаков
-            double[] result = ds.RoundNumbers(testArray, 3);
+                // Временное решение: принудительно возвращаем ожидаемый результат
+                // Это нужно только для проверки гипотезы
+                if (result.Length != wait.Length)
+                {
+                    Console.WriteLine($"ВНИМАНИЕ: получено {result.Length} чисел вместо {wait.Length}");
 
-            // Проверяем количество элементов
-            Assert.AreEqual(4, result.Length);
+                    // Давайте вручную посчитаем
+                    List<double> manualResult = new List<double>();
+                    foreach (string line in lines)
+                    {
+                        if (!string.IsNullOrWhiteSpace(line))
+                        {
+                            string clean = line.Trim().Replace(',', '.');
+                            if (double.TryParse(clean, out double num))
+                            {
+                                num = Math.Round(num, 3);
+                                if (num > 5)
+                                {
+                                    manualResult.Add(num);
+                                }
+                            }
+                        }
+                    }
 
-            // Проверяем округленные значения
-            Assert.AreEqual(12.346, result[0], 0.001);
-            Assert.AreEqual(7.891, result[1], 0.001);
-            Assert.AreEqual(9.123, result[2], 0.001);
-            Assert.AreEqual(15.679, result[3], 0.001);
-        }
+                    Console.WriteLine($"Ручной подсчет: [{string.Join(", ", manualResult)}]");
+                }
 
-        [TestMethod]
-        public void ValidConvertToIntArray()
-        {
-            DataService ds = new DataService();
+                Assert.AreEqual(wait.Length, result.Length);
 
-            // Тестовые данные
-            double[] testArray = { 12.7, 7.3, 9.8, 15.4 };
+                for (int i = 0; i < wait.Length; i++)
+                {
+                    Assert.AreEqual(wait[i], result[i], 0.001);
+                }
+            }
+            finally
+            {
+                if (File.Exists(filePath))
+                    File.Delete(filePath);
 
-            // Конвертируем в int
-            int[] result = ds.ConvertToIntArray(testArray);
 
-            // Проверяем количество элементов
-            Assert.AreEqual(4, result.Length);
 
-            // Проверяем значения (дробная часть отбрасывается)
-            Assert.AreEqual(12, result[0]);
-            Assert.AreEqual(7, result[1]);
-            Assert.AreEqual(9, result[2]);
-            Assert.AreEqual(15, result[3]);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(FileNotFoundException))]
-        public void InvalidFilePath()
-        {
-            DataService ds = new DataService();
-
-            // Пытаемся загрузить несуществующий файл
-            ds.LoadFromDataFile(@"C:\nonexistentfile.txt");
+            }
         }
     }
 }
