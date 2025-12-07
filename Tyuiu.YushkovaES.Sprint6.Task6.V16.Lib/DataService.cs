@@ -10,18 +10,18 @@ namespace Tyuiu.YushkovaES.Sprint6.Task6.V16.Lib
         {
             StringBuilder result = new StringBuilder();
 
-            using (StreamReader reader = new StreamReader(path, Encoding.UTF8))
+            using (StreamReader reader = new StreamReader(path))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    // Разбиваем строку на слова по пробелам
+                    // Разбиваем строку на слова
                     string[] words = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
                     foreach (string word in words)
                     {
-                        // Проверяем, содержит ли слово букву 'b' или 'B'
-                        if (word.Contains('b') || word.Contains('B'))
+                        // Ищем ТОЛЬКО строчную букву 'b'
+                        if (word.Contains('b'))
                         {
                             result.Append(word).Append(" ");
                         }
@@ -29,14 +29,8 @@ namespace Tyuiu.YushkovaES.Sprint6.Task6.V16.Lib
                 }
             }
 
-            // Убираем последний пробел, если он есть
-            if (result.Length > 0)
-            {
-                result.Length--; // Удаляем последний символ (пробел)
-            }
-
-            return result.ToString();
-
+            // Убираем последний пробел
+            return result.ToString().TrimEnd();
 
 
         }

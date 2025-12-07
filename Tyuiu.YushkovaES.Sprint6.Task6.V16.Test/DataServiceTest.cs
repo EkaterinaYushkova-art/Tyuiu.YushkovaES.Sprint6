@@ -21,16 +21,16 @@ KyiidnDo FVUh XNQBU sMLuPzlvneiTo
 XIpph QN hZznJL bWk Rz tfouGdncXlJ";
 
             // Явно указываем кодировку UTF8 при записи
-            File.WriteAllText(testPath, testData, Encoding.UTF8);
+            File.WriteAllText(testPath, testData);
 
-            // Ожидаемый результат - слова с 'b' или 'B'
-            string expected = "UpGwjzkBH BYiySs BXGdYDF brIBPtX bWk";
+            // Ожидаем ТОЛЬКО слова со строчной 'b'
+            string expected = "brIBPtX bWk";
 
-            // Получаем фактический результат
             string actual = ds.CollectTextFromFile(testPath);
 
-            // Проверяем
-            Assert.AreEqual(expected, actual, $"Ожидалось: '{expected}', Получено: '{actual}'");
+            Assert.AreEqual(expected, actual,
+                $"Ожидалось: '{expected}'\nПолучено: '{actual}'");
+
 
 
 
