@@ -11,7 +11,7 @@ namespace Tyuiu.YushkovaES.Sprint6.Task6.V16.Test
             DataService ds = new DataService();
 
             // Создаем тестовый файл с известным содержимым
-            string testPath = @"InPutFileTask6V16.txt";
+            string testPath = @"C:\Users\user\source\repos\Tyuiu.YushkovaES.Sprint6\спринт6\InPutDataFileTask6V16.txt";
 
             // Записываем тестовые данные в файл
             string testData = @"UPPfdzU ulzPXa UpGwjzkBH xvfsWpk
